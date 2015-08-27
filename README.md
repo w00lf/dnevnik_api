@@ -1,6 +1,6 @@
 # DnevnikApi
 
-TODO: Write a gem description
+Ruby wrapper around Dnevnik API - https://api.dnevnik.ru/, supports simple api call, uses faraday for requests
 
 ## Installation
 
@@ -20,7 +20,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+token
+```ruby
+client = DnevnikApi::Client.new(token: your_access_token)
+# Get user information(https://api.dnevnik.ru/#Users)
+client.user(id: user_id)
+```
 
 ## Contributing
 
