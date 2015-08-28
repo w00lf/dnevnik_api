@@ -22,7 +22,6 @@ module DnevnikApi
     end
 
     def get_request(uri, options)
-      byebug
       @connection.get(uri, with_default_options(options)).body
     end
 
@@ -34,6 +33,7 @@ module DnevnikApi
         # builder.response :logger
         builder.response :mashify
         # builder.response :oj, preserve_raw: true
+        builder.adapter  Faraday.default_adapter
       end
     end
   end
