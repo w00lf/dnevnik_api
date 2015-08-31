@@ -10,6 +10,15 @@ Add this line to your application's Gemfile:
 gem 'dnevnik_api'
 ```
 
+To use gem you need to configurate it:
+
+```ruby
+DnevnikApi.configure do |config|
+    config.client_id = "Your dnevnik api id"
+    config.client_secret = "Your dnevnik api secret"
+end
+```
+
 And then execute:
 
     $ bundle

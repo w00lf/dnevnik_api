@@ -1,12 +1,22 @@
 module DnevnikApi
   class Client
-    URL_PRODUCTION = 'https://api.dnevnik.ru/v1/'
-    URL_DEBUG = 'https://api.staging.dnevnik.ru/v1/'
+
+    attr_accessor :token
 
     def initialize(options)
-      url = options[:debug] ? URL_DEBUG : URL_PRODUCTION
       @token = options[:token]
+      @configuration = DnevnikApi.configuration
+      url = @configuration.api_url_base
       @connection = intialize_connection(url)
+    end
+
+    def access_token(code)
+      client_secret = @configuration.client_secret
+      client_id = @configuration.client_id
+      post_request("authorizations",
+                   { code: code,
+                     client_secret: client_secret,
+                     client_id: client_id })
     end
 
     def user(options = {})
@@ -22,7 +32,11 @@ module DnevnikApi
     end
 
     def get_request(uri, options)
-      @connection.get(uri, with_default_options(options)).body
+      JSON.parse(@connection.get(uri, with_default_options(options)).body)
+    end
+
+    def post_request(uri, options)
+      JSON.parse(@connection.post(uri, with_default_options(options)).body)
     end
 
     def intialize_connection(url)
