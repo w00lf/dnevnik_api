@@ -34,6 +34,12 @@ token
 client = DnevnikApi::Client.new(token: your_access_token)
 # Get user information(https://api.dnevnik.ru/#Users)
 client.user(id: user_id)
+
+# Get user schools list(https://api.dnevnik.ru/#EducationMemberships)
+client.user_schools(id: user_id)
+
+# Get user education groups (https://api.dnevnik.ru/#EducationMemberships)
+client.user_edu_groups(id: user_id)
 ```
 
 ## Contributing

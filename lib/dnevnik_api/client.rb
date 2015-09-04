@@ -20,12 +20,23 @@ module DnevnikApi
     end
 
     def user(options = {})
-      id = options.delete(:id) || 'me'
+      user_meta(options)
+    end
 
-      get_request("users/#{id}", options.merge(id: id))
+    def user_schools(options = {})
+      user_meta(options, 'schools')
+    end
+
+    def user_edu_groups(options = {})
+      user_meta(options, 'edu-groups')
     end
 
     private
+
+    def user_meta(options, additional_uri = '')
+      id = options.delete(:id) || 'me'
+      get_request("users/#{id}/#{additional_uri}", options.merge(id: id))
+    end
 
     def with_default_options(options)
       options.merge(access_token: @token)
